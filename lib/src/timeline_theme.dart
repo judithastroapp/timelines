@@ -331,9 +331,6 @@ class TimelineThemeData with Diagnosticable {
 
   @override
   int get hashCode {
-    // Warning: For the sanity of the reader, please make sure these properties
-    // are in the exact same order as in operator == and in the raw constructor
-    // and in the order of fields in the class and in the lerp() method.
     final values = <Object>[
       direction,
       color,
@@ -343,7 +340,12 @@ class TimelineThemeData with Diagnosticable {
       indicatorTheme,
       connectorTheme,
     ];
-    return hashList(values);
+    
+    int hash = 0;
+    for (var value in values) {
+      hash = Object.hash(hash, value);
+    }
+    return hash;
   }
 
   @override
